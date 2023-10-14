@@ -2,6 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
 
+  poweredByHeader: false,
+
   async headers() {
     const scriptCSP = ['script-src', "'self'"];
 
