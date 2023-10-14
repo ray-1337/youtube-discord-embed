@@ -10,17 +10,18 @@
   },
   "dependencies": {
     "dotenv": "^16.3.1",
+    "next": "13.5.4",
     "react": "^18",
     "react-dom": "^18",
     "undici": "^5.26.3",
     "ytdl-core": "^4.11.5"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
-    "eslint-config-next": "13.5.4"
+    "eslint-config-next": "13.5.4",
+    "typescript": "^5"
   }
 }
