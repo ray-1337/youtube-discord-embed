@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "dotenv": "^16.3.1",
     "react": "^18",
     "react-dom": "^18",
-    "next": "13.5.4"
+    "undici": "^5.26.3",
+    "ytdl-core": "^4.11.5"
   },
   "devDependencies": {
     "typescript": "^5",
