@@ -17,11 +17,15 @@
     "ytdl-core": "^4.11.5"
   },
   "devDependencies": {
+    "@types/ms": "^0.7.32",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "13.5.4",
     "typescript": "^5"
+  },
+  "optionalDependencies": {
+    "ms": "^2.1.3"
   }
 }
