@@ -78,6 +78,8 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
           <meta name="twitter:player:height" content={String(props?.height)} />
           <meta name="twitter:player:stream" content={props.url} />
           <meta name="twitter:player:stream:content_type" content={new URL(props.url).pathname.endsWith("webm") ? "video/webm" : "video/mp4"} />
+
+          <link rel="alternate" href={`https://${props?.host}/api/oembed?text=${description}&url=${parsedVideoURL}`} type="application/json+oembed" title={authorText}/>
         </>
       ) }
     </Head>
