@@ -56,7 +56,7 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
           
           <meta property="og:video" content={props?.video_url} />
           <meta property="og:video:secure_url" content={props?.video_url} />
-          <meta property="og:video:type" content={new URL(props?.video_url).pathname.endsWith("webm") ? "video/webm" : "video/mp4"} />
+          <meta property="og:video:type" content={"video/mp4"} />
           <meta property="og:video:width" content={String(props?.width)} />
           <meta property="og:video:height" content={String(props?.height)} />
 
@@ -71,7 +71,7 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
           <meta name="twitter:player:width" content={String(props?.width)} />
           <meta name="twitter:player:height" content={String(props?.height)} />
           <meta name="twitter:player:stream" content={props?.video_url} />
-          <meta name="twitter:player:stream:content_type" content={new URL(props?.video_url).pathname.endsWith("webm") ? "video/webm" : "video/mp4"} />
+          <meta name="twitter:player:stream:content_type" content={"video/mp4"} />
 
           <link rel="alternate" href={`https://${props?.host}/api/oembed?text=${props?.title}&url=${fallbackURLToCircleOfHell}`} type="application/json+oembed" title={authorText}/>
         </>
