@@ -93,7 +93,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext<{v?: str
     if (!firstRawVideoURL?.url?.length || !firstRawVideoURL?.mimeType?.length) return { props: {} };
 
     const content: YouTubeMetadataBeforeDOM = {
-      author_name: ytVideoInfo?.videoDetails?.author?.name,
+      author_name: `${ytVideoInfo?.videoDetails?.author?.name} (${ytVideoInfo?.videoDetails?.author?.user})`,
       author_url: ytVideoInfo?.videoDetails?.author?.channel_url,
       thumbnail_url: ytVideoInfo?.videoDetails?.thumbnails?.pop()?.url,
       title: ytVideoInfo?.videoDetails?.title,
