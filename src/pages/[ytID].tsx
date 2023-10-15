@@ -1,10 +1,9 @@
 import "dotenv/config";
-import Head from "next/head";
 
+import Head from "next/head";
 import type { InferGetServerSidePropsType } from "next";
 import type { YouTubeMetadataBeforeDOM, ServerSidePropsWithV } from "../../typings";
 import { useEffect, type FC } from "react";
-import { useRouter } from "next/router";
 import ms from "ms";
 import ytdl from "ytdl-core";
 import { dynamicSearchForYouTubeID } from "@/helpers/utility";
@@ -13,8 +12,6 @@ const cachedURL = new Map<string, YouTubeMetadataBeforeDOM>();
 const cacheTime = ms("6h");
 
 const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (props) => {
-  const router = useRouter(); 
-
   const fallbackURLToCircleOfHell = props?.url || "https://github.com/ray-1337";
 
   useEffect(() => {
