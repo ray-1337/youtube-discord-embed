@@ -99,7 +99,8 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext<{v?: str
       title: ytVideoInfo?.videoDetails?.title,
       url: firstRawVideoURL.url,
       height: firstRawVideoURL.height,
-      width: firstRawVideoURL.width
+      width: firstRawVideoURL.width,
+      host: ctx?.req?.headers?.host
     };
 
     cachedURL.set(youtubeID, content);
