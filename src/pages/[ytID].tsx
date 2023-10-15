@@ -1,13 +1,13 @@
 import "dotenv/config";
 import Head from "next/head";
 
-import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
-import type { YouTubeMetadataBeforeDOM } from "../../typings";
+import type { InferGetServerSidePropsType } from "next";
+import type { YouTubeMetadataBeforeDOM, ServerSidePropsWithV } from "../../typings";
 import { useEffect, type FC } from "react";
-
 import { useRouter } from "next/router";
 import ms from "ms";
 import ytdl from "ytdl-core";
+import { dynamicSearchForYouTubeID } from "@/helpers/utility";
 
 const cachedURL = new Map<string, YouTubeMetadataBeforeDOM>();
 const cacheTime = ms("6h");
@@ -79,16 +79,16 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
           <meta name="twitter:player:stream" content={props.url} />
           <meta name="twitter:player:stream:content_type" content={new URL(props.url).pathname.endsWith("webm") ? "video/webm" : "video/mp4"} />
 
-          <link rel="alternate" href={`https://${props?.host}/api/oembed?text=${description}&url=${parsedVideoURL}`} type="application/json+oembed" title={authorText}/>
+          <link rel="alternate" href={`https://${props?.host}/api/oembed?text=${props?.title}&url=${parsedVideoURL}`} type="application/json+oembed" title={authorText}/>
         </>
       ) }
     </Head>
   );
 };
 
-export async function getServerSideProps(ctx: GetServerSidePropsContext<{v?: string}>) {
+export async function getServerSideProps(ctx: ServerSidePropsWithV) {
   try {
-    const youtubeID = ctx?.query?.v as string | undefined;
+    const youtubeID = dynamicSearchForYouTubeID(ctx); // ctx?.query?.v as string | undefined;
     if (!youtubeID?.length || !ytdl.validateID(youtubeID)) return { props: {} };
 
     if (cachedURL.has(youtubeID)) {
