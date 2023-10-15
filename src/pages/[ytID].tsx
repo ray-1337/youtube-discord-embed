@@ -15,10 +15,7 @@ const cacheTime = ms("6h");
 const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (props) => {
   const router = useRouter(); 
 
-  const parsedVideoID = router?.query?.v;
-  const parsedVideoURL = `https://youtu.be/${parsedVideoID}`;
-
-  const fallbackURLToCircleOfHell = parsedVideoID?.length ? parsedVideoURL : "https://github.com/ray-1337";
+  const fallbackURLToCircleOfHell = props?.url || "https://github.com/ray-1337";
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -48,14 +45,14 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
 
       { (typeof props === "object" && props?.video_url?.length) && (
         <>
-          <link rel="canonical" href={parsedVideoURL}/>
+          <link rel="canonical" href={fallbackURLToCircleOfHell}/>
 
           <meta name="theme-color" content="#ff0000" />
 
           <meta property="description" content={description}/>
           <meta property="og:title" content={title}/>
           <meta property="og:type" content="website"/>
-          <meta property="og:url" content={parsedVideoURL}/>
+          <meta property="og:url" content={fallbackURLToCircleOfHell}/>
           <meta property="og:image" content={image} />
           <meta property="og:description" content={description}/>
           <meta property="og:site_name" content={authorText} />
@@ -67,19 +64,19 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
           <meta property="og:video:height" content={String(props?.height)} />
 
           <meta name="twitter:domain" content={"13373333.one"}/>
-          <meta name="twitter:url" content={parsedVideoURL}/>
+          <meta name="twitter:url" content={fallbackURLToCircleOfHell}/>
           <meta name="twitter:description" content={title}/>
           <meta name="twitter:card" content="player" />
           <meta name="twitter:title" content={description} />
           <meta name="twitter:image" content={"0"} />
 
-          <meta name="twitter:player" content={parsedVideoURL} />
+          <meta name="twitter:player" content={fallbackURLToCircleOfHell} />
           <meta name="twitter:player:width" content={String(props?.width)} />
           <meta name="twitter:player:height" content={String(props?.height)} />
           <meta name="twitter:player:stream" content={props?.video_url} />
           <meta name="twitter:player:stream:content_type" content={new URL(props?.video_url).pathname.endsWith("webm") ? "video/webm" : "video/mp4"} />
 
-          <link rel="alternate" href={`https://${props?.host}/api/oembed?text=${props?.title}&url=${parsedVideoURL}`} type="application/json+oembed" title={authorText}/>
+          <link rel="alternate" href={`https://${props?.host}/api/oembed?text=${props?.title}&url=${fallbackURLToCircleOfHell}`} type="application/json+oembed" title={authorText}/>
         </>
       ) }
     </Head>
