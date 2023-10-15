@@ -25,6 +25,11 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
       window.open(fallbackURLToCircleOfHell, "_self");
     };
   }, []);
+  // discord
+  const title = props?.author_name;
+  const description = props?.title;
+  const authorText = "YouTube / 13373333.one"
+  const image = props?.thumbnail_url || "";
 
   return (
     <Head>
@@ -32,27 +37,32 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
 
       { (typeof props === "object" && props?.url?.length) && (
         <>
-          <meta content="#ff0000" name="theme-color" />
-          <meta property="description" content={props?.author_name}/>
+          <link rel="canonical" href={parsedVideoURL}/>
 
-          <meta property="og:site_name" content="YouTube / ray#1337" />
-          <meta property="og:url" content={parsedVideoURL}/>
+          <meta name="theme-color" content="#ff0000" />
+
+          <meta property="description" content={description}/>
+          <meta property="og:title" content={title}/>
           <meta property="og:type" content="website"/>
-          <meta property="og:title" content={props?.title || ""}/>
-          <meta property="og:description" content={props?.author_name}/>
+          <meta property="og:url" content={parsedVideoURL}/>
+          <meta property="og:image" content={image} />
+          <meta property="og:description" content={description}/>
+          <meta property="og:site_name" content={authorText} />
+          
           <meta property="og:video" content={props.url} />
           <meta property="og:video:secure_url" content={props.url} />
           <meta property="og:video:type" content={new URL(props.url).pathname.endsWith("webm") ? "video/webm" : "video/mp4"} />
           <meta property="og:video:width" content={String(props?.width)} />
           <meta property="og:video:height" content={String(props?.height)} />
-          <meta property="og:image" content={props?.thumbnail_url || ""} />
 
           <meta name="twitter:domain" content={"13373333.one"}/>
           <meta name="twitter:url" content={parsedVideoURL}/>
-          <meta name="twitter:description" content={props?.author_name}/>
+          <meta name="twitter:description" content={title}/>
           <meta name="twitter:card" content="player" />
-          <meta name="twitter:title" content={props?.title || ""} />
-          <meta name="twitter:image" content={props?.thumbnail_url || ""} />
+          <meta name="twitter:title" content={description} />
+          <meta name="twitter:image" content={"0"} />
+
+          <meta name="twitter:player" content={parsedVideoURL} />
           <meta name="twitter:player:width" content={String(props?.width)} />
           <meta name="twitter:player:height" content={String(props?.height)} />
           <meta name="twitter:player:stream" content={props.url} />
