@@ -97,7 +97,9 @@ export async function getServerSideProps(ctx: ServerSidePropsWithV) {
     // below this code pictures how stupid i am
     const ytVideoInfo = await ytdl.getInfo(rawYouTubeURL, { 
       requestOptions: {
+        headers: {
         cookie: process.env.COOKIE_BYPASS
+        }
       }
     });
 
