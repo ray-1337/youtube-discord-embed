@@ -46,7 +46,7 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
     <Head>
       <meta httpEquiv={"refresh"} content={`0; url=${fallbackURLToCircleOfHell}`} />
 
-      { (typeof props === "object" && props?.url?.length) && (
+      { (typeof props === "object" && props?.video_url?.length) && (
         <>
           <link rel="canonical" href={parsedVideoURL}/>
 
@@ -60,9 +60,9 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
           <meta property="og:description" content={description}/>
           <meta property="og:site_name" content={authorText} />
           
-          <meta property="og:video" content={props.url} />
-          <meta property="og:video:secure_url" content={props.url} />
-          <meta property="og:video:type" content={new URL(props.url).pathname.endsWith("webm") ? "video/webm" : "video/mp4"} />
+          <meta property="og:video" content={props?.video_url} />
+          <meta property="og:video:secure_url" content={props?.video_url} />
+          <meta property="og:video:type" content={new URL(props?.video_url).pathname.endsWith("webm") ? "video/webm" : "video/mp4"} />
           <meta property="og:video:width" content={String(props?.width)} />
           <meta property="og:video:height" content={String(props?.height)} />
 
@@ -76,8 +76,8 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
           <meta name="twitter:player" content={parsedVideoURL} />
           <meta name="twitter:player:width" content={String(props?.width)} />
           <meta name="twitter:player:height" content={String(props?.height)} />
-          <meta name="twitter:player:stream" content={props.url} />
-          <meta name="twitter:player:stream:content_type" content={new URL(props.url).pathname.endsWith("webm") ? "video/webm" : "video/mp4"} />
+          <meta name="twitter:player:stream" content={props?.video_url} />
+          <meta name="twitter:player:stream:content_type" content={new URL(props?.video_url).pathname.endsWith("webm") ? "video/webm" : "video/mp4"} />
 
           <link rel="alternate" href={`https://${props?.host}/api/oembed?text=${props?.title}&url=${parsedVideoURL}`} type="application/json+oembed" title={authorText}/>
         </>
@@ -120,7 +120,8 @@ export async function getServerSideProps(ctx: ServerSidePropsWithV) {
       author_url: ytVideoInfo?.videoDetails?.author?.channel_url,
       thumbnail_url: ytVideoInfo?.videoDetails?.thumbnails?.pop()?.url,
       title: ytVideoInfo?.videoDetails?.title,
-      url: firstRawVideoURL.url,
+      video_url: firstRawVideoURL.url,
+      url: `https://youtu.be/${youtubeID}`,
       height: firstRawVideoURL.height,
       width: firstRawVideoURL.width,
       host: ctx?.req?.headers?.host
