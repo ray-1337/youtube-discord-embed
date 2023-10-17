@@ -2,7 +2,7 @@ import "dotenv/config";
 
 import Head from "next/head";
 import type { InferGetServerSidePropsType } from "next";
-import type { YouTubeMetadataBeforeDOM, ServerSidePropsWithV } from "../../typings";
+import type { YouTubeMetadataBeforeDOM, ServerSidePropsWithV } from "../helpers/typings";
 import { useEffect, type FC } from "react";
 import ms from "ms";
 import ytdl from "ytdl-core";
