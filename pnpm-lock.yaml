@@ -18,8 +18,8 @@ dependencies:
     specifier: ^18
     version: 18.2.0(react@18.2.0)
   ytdl-core:
-    specifier: 4.9.2
-    version: 4.9.2
+    specifier: 4.11.4
+    version: 4.11.4
 
 optionalDependencies:
   ms:
@@ -2280,9 +2280,9 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /ytdl-core@4.9.2:
-    resolution: {integrity: sha512-aTlsvsN++03MuOtyVD4DRF9Z/9UAeeuiNbjs+LjQBAiw4Hrdp48T3U9vAmRPyvREzupraY8pqRoBfKGqpq+eHA==}
-    engines: {node: '>=10'}
+  /ytdl-core@4.11.4:
+    resolution: {integrity: sha512-tsVvqt++B5LSTMnCKQb4H/PFBewKj7gGPJ6KIM5gOFGMKNZj4qglGAl4QGFG8cNPP6wY54P80FDID5eN2di0GQ==}
+    engines: {node: '>=12'}
     dependencies:
       m3u8stream: 0.8.6
       miniget: 4.2.3
