@@ -14,6 +14,7 @@ This concept is pretty much the same with [FixTweet](https://fixupx.com) or simi
 
 ## Nice, can I use this?
 Absolutely, you can fork the repo, host it somewhere else, and change the domain.
+> YouTube Shorts URL coming soon. :>
 
 - https://www.youtube.com/watch?v=dQw4w9WgXcQ (with `/watch` route)
   - https://yt.cdn.13373333.one/watch?v=dQw4w9WgXcQ, or https://yourdomain.com/watch?v=dQw4w9WgXcQ
