@@ -98,17 +98,30 @@ export async function getServerSideProps(ctx: ServerSidePropsWithV) {
     const ytVideoInfo = await ytdl.getInfo(rawYouTubeURL, { 
       requestOptions: {
         headers: {
-        cookie: process.env.COOKIE_BYPASS
+          cookie: process.env.COOKIE_BYPASS
         }
       }
     });
 
     if (!ytVideoInfo) return { props: {} };
     
-    const filteredFormats = ytVideoInfo.formats
-    .filter(format => format.hasAudio && format.hasVideo && !format.isLive && !format.isHLS && format.quality === "medium");
+    const liteFilteredFormats = ytVideoInfo.formats
+    .filter(format => format.hasAudio && format.hasVideo && !format.isLive && !format.isHLS);
 
-    const firstRawVideoURL = filteredFormats?.[0];
+    const filteredFormats = liteFilteredFormats.filter(format => format.quality === "medium" || format.quality === "hd720");
+
+    let highestFormat = filteredFormats.find(format => format.quality === "hd720");
+    if (!highestFormat) {
+      const lowest = filteredFormats.find(format => format.quality === "medium");
+      if (!lowest) {
+        return { props: {} };
+      };
+
+      highestFormat = lowest;
+    };
+
+
+    const firstRawVideoURL = highestFormat;
     if (!firstRawVideoURL?.url?.length || !firstRawVideoURL?.mimeType?.length) return { props: {} };
 
     const content: YouTubeMetadataBeforeDOM = {
