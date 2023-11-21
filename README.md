@@ -1,6 +1,9 @@
 # youtube-discord-embed
 Embed YouTube video on Discord, inspired by [FixTweet](https://fixupx.com), powered by [Next.js](https://nextjs.org)/[Vercel](https://vercel.app).
 
+## Disclaimer
+Due to recent YouTube preventing adblockers move, these can break at anytime without notice.
+
 ## Motivation
 I just hate the current YouTube embed, where in mobile, you'll be redirected outside Discord/to YouTube app just to play a video, which is not a really pleasant experience.
 
