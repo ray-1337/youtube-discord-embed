@@ -1,4 +1,4 @@
-import { validateID } from "ytdl-core";
+import { validateID } from "@distube/ytdl-core";
 import { ServerSidePropsWithV } from "./typings";
 
 export function dynamicSearchForYouTubeID(context: ServerSidePropsWithV) {
