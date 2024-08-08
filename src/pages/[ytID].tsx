@@ -5,7 +5,7 @@ import type { InferGetServerSidePropsType } from "next";
 import type { YouTubeMetadataBeforeDOM, ServerSidePropsWithV } from "../helpers/typings";
 import { useEffect, type FC } from "react";
 import ms from "ms";
-import ytdl from "ytdl-core";
+import ytdl from "@distube/ytdl-core";
 import { dynamicSearchForYouTubeID } from "@/helpers/utility";
 
 const cachedURL = new Map<string, YouTubeMetadataBeforeDOM>();
