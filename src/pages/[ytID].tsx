@@ -11,6 +11,16 @@ import { dynamicSearchForYouTubeID } from "@/helpers/utility";
 const cachedURL = new Map<string, YouTubeMetadataBeforeDOM>();
 const cacheTime = ms("6h");
 
+let cookiesList: ytdl.Cookie[] = [];
+
+if (cookiesList.length <= 0) {
+  if (typeof process.env?.COOKIE_BYPASS === "string") {
+    cookiesList = JSON.parse(process.env.COOKIE_BYPASS);
+  };
+};
+
+const agent = ytdl.createAgent(cookiesList);
+
 const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (props) => {
   const fallbackURLToCircleOfHell = props?.url || "https://github.com/ray-1337";
 
@@ -95,7 +105,7 @@ export async function getServerSideProps(ctx: ServerSidePropsWithV) {
     const rawYouTubeURL = "https://youtu.be/" + youtubeID;
 
     // below this code pictures how stupid i am
-    const ytVideoInfo = await ytdl.getInfo(rawYouTubeURL);
+    const ytVideoInfo = await ytdl.getInfo(rawYouTubeURL, { agent });
 
     if (!ytVideoInfo) return { props: {} };
     
