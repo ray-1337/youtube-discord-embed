@@ -22,11 +22,11 @@ if (cookiesList.length <= 0) {
 const agent = ytdl.createAgent(cookiesList);
 
 const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (props) => {
-  const fallbackURLToCircleOfHell = props?.url || "https://github.com/ray-1337";
+  const fallbackURL = props?.url || "https://github.com/ray-1337";
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      window.open(fallbackURLToCircleOfHell, "_self");
+      window.open(fallbackURL, "_self");
     };
   }, []);
 
@@ -48,18 +48,18 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
 
   return (
     <Head>
-      <meta httpEquiv={"refresh"} content={`0; url=${fallbackURLToCircleOfHell}`} />
+      <meta httpEquiv={"refresh"} content={`0; url=${fallbackURL}`} />
 
       { (typeof props === "object" && props?.video_url?.length) && (
         <>
-          <link rel="canonical" href={fallbackURLToCircleOfHell}/>
+          <link rel="canonical" href={fallbackURL}/>
 
           <meta name="theme-color" content="#ff0000" />
 
           <meta property="description" content={description}/>
           <meta property="og:title" content={title}/>
           <meta property="og:type" content="website"/>
-          <meta property="og:url" content={fallbackURLToCircleOfHell}/>
+          <meta property="og:url" content={fallbackURL}/>
           <meta property="og:image" content={image} />
           <meta property="og:description" content={description}/>
           <meta property="og:site_name" content={authorText} />
@@ -71,19 +71,19 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
           <meta property="og:video:height" content={String(props?.height)} />
 
           <meta name="twitter:domain" content={"13373333.one"}/>
-          <meta name="twitter:url" content={fallbackURLToCircleOfHell}/>
+          <meta name="twitter:url" content={fallbackURL}/>
           <meta name="twitter:description" content={title}/>
           <meta name="twitter:card" content="player" />
           <meta name="twitter:title" content={description} />
           <meta name="twitter:image" content={"0"} />
 
-          <meta name="twitter:player" content={fallbackURLToCircleOfHell} />
+          <meta name="twitter:player" content={fallbackURL} />
           <meta name="twitter:player:width" content={String(props?.width)} />
           <meta name="twitter:player:height" content={String(props?.height)} />
           <meta name="twitter:player:stream" content={props?.video_url} />
           <meta name="twitter:player:stream:content_type" content={"video/mp4"} />
 
-          <link rel="alternate" href={`https://${props?.host}/api/oembed?text=${props?.title}&url=${fallbackURLToCircleOfHell}`} type="application/json+oembed" title={authorText}/>
+          <link rel="alternate" href={`https://${props?.host}/api/oembed?text=${props?.title}&url=${fallbackURL}`} type="application/json+oembed" title={authorText}/>
         </>
       ) }
     </Head>
