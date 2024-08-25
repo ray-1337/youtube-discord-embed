@@ -3,7 +3,7 @@ import "dotenv/config";
 import Head from "next/head";
 import type { InferGetServerSidePropsType } from "next";
 import type { YouTubeMetadataBeforeDOM, ServerSidePropsWithV } from "../helpers/typings";
-import { useEffect, type FC } from "react";
+import { useEffect, type FC, Fragment } from "react";
 import ms from "ms";
 import ytdl from "@distube/ytdl-core";
 import { dynamicSearchForYouTubeID } from "@/helpers/utility";
@@ -50,42 +50,44 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
     <Head>
       <meta httpEquiv={"refresh"} content={`0; url=${fallbackURL}`} />
 
-      { (typeof props === "object" && props?.video_url?.length) && (
-        <>
-          <link rel="canonical" href={fallbackURL}/>
+      {
+        (typeof props === "object" && props?.video_url?.length) && (
+          <Fragment>
+            <link rel="canonical" href={fallbackURL} />
 
-          <meta name="theme-color" content="#ff0000" />
+            <meta name="theme-color" content="#ff0000" />
 
-          <meta property="description" content={description}/>
-          <meta property="og:title" content={title}/>
-          <meta property="og:type" content="website"/>
-          <meta property="og:url" content={fallbackURL}/>
-          <meta property="og:image" content={image} />
-          <meta property="og:description" content={description}/>
-          <meta property="og:site_name" content={authorText} />
-          
-          <meta property="og:video" content={props?.video_url} />
-          <meta property="og:video:secure_url" content={props?.video_url} />
-          <meta property="og:video:type" content={"video/mp4"} />
-          <meta property="og:video:width" content={String(props?.width)} />
-          <meta property="og:video:height" content={String(props?.height)} />
+            <meta property="description" content={description} />
+            <meta property="og:title" content={title} />
+            <meta property="og:type" content="website" />
+            <meta property="og:url" content={fallbackURL} />
+            <meta property="og:image" content={image} />
+            <meta property="og:description" content={description} />
+            <meta property="og:site_name" content={authorText} />
 
-          <meta name="twitter:domain" content={"13373333.one"}/>
-          <meta name="twitter:url" content={fallbackURL}/>
-          <meta name="twitter:description" content={title}/>
-          <meta name="twitter:card" content="player" />
-          <meta name="twitter:title" content={description} />
-          <meta name="twitter:image" content={"0"} />
+            <meta property="og:video" content={props?.video_url} />
+            <meta property="og:video:secure_url" content={props?.video_url} />
+            <meta property="og:video:type" content={"video/mp4"} />
+            <meta property="og:video:width" content={String(props?.width)} />
+            <meta property="og:video:height" content={String(props?.height)} />
 
-          <meta name="twitter:player" content={fallbackURL} />
-          <meta name="twitter:player:width" content={String(props?.width)} />
-          <meta name="twitter:player:height" content={String(props?.height)} />
-          <meta name="twitter:player:stream" content={props?.video_url} />
-          <meta name="twitter:player:stream:content_type" content={"video/mp4"} />
+            <meta name="twitter:domain" content={"13373333.one"} />
+            <meta name="twitter:url" content={fallbackURL} />
+            <meta name="twitter:description" content={title} />
+            <meta name="twitter:card" content="player" />
+            <meta name="twitter:title" content={description} />
+            <meta name="twitter:image" content={"0"} />
 
-          <link rel="alternate" href={`https://${props?.host}/api/oembed?text=${props?.title}&url=${fallbackURL}`} type="application/json+oembed" title={authorText}/>
-        </>
-      ) }
+            <meta name="twitter:player" content={fallbackURL} />
+            <meta name="twitter:player:width" content={String(props?.width)} />
+            <meta name="twitter:player:height" content={String(props?.height)} />
+            <meta name="twitter:player:stream" content={props?.video_url} />
+            <meta name="twitter:player:stream:content_type" content={"video/mp4"} />
+
+            <link rel="alternate" href={`https://${props?.host}/api/oembed?text=${props?.title}&url=${fallbackURL}`} type="application/json+oembed" title={authorText} />
+          </Fragment>
+        )
+      }
     </Head>
   );
 };
