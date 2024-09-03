@@ -8,7 +8,7 @@ import ms from "ms";
 import ytdl from "@distube/ytdl-core";
 import { dynamicSearchForYouTubeID } from "@/helpers/utility";
 
-const cachedURL = new Map<string, YouTubeMetadataBeforeDOM>();
+const cache = new Map<string, YouTubeMetadataBeforeDOM>();
 const cacheTime = ms("6h");
 
 let cookiesList: ytdl.Cookie[] = [];
@@ -94,14 +94,13 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
 
 export async function getServerSideProps(ctx: ServerSidePropsWithV) {
   try {
-    const youtubeID = dynamicSearchForYouTubeID(ctx); // ctx?.query?.v as string | undefined;
+    const youtubeID = dynamicSearchForYouTubeID(ctx);
     if (!youtubeID?.length || !ytdl.validateID(youtubeID)) return { props: {} };
 
-    if (cachedURL.has(youtubeID)) {
-      const cachedURLAfterHas = cachedURL?.get(youtubeID);
-      if (!cachedURLAfterHas) return { props: {} };
+    if (cache.has(youtubeID)) {
+      const cachedURL = cache.get(youtubeID) as YouTubeMetadataBeforeDOM; 
 
-      return { props: { ...cachedURLAfterHas } };
+      return { props: { ...cachedURL } };
     };
 
     const rawYouTubeURL = "https://youtu.be/" + youtubeID;
@@ -142,9 +141,9 @@ export async function getServerSideProps(ctx: ServerSidePropsWithV) {
       host: ctx?.req?.headers?.host
     };
 
-    cachedURL.set(youtubeID, content);
+    cache.set(youtubeID, content);
 
-    setTimeout(() => cachedURL.delete(youtubeID), cacheTime);
+    setTimeout(() => cache.delete(youtubeID), cacheTime);
 
     return { props: { ...content } };
   } catch (error) {
