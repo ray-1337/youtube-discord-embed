@@ -30,16 +30,6 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
     };
   }, []);
 
-  // if (props?.width && props?.height) {
-  //   if (props?.width > 1920 || props?.height > 1920) {
-  //     props.width = props.width * 0.5;
-  //     props.width = props.height * 0.5;
-  //   } else if (props.width < 400 && props.height < 400) {
-  //     props.width = props.width * 2;
-  //     props.width = props.height * 2;
-  //   };
-  // };
-
   // discord
   const title = props?.author_name;
   const description = props?.title;
