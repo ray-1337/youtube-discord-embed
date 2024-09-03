@@ -19,11 +19,15 @@ This concept is pretty much the same with [FixTweet](https://fixupx.com) or simi
 ## Nice, can I use this?
 Absolutely, you can fork the repo, host it somewhere else, and change the domain.
 
-- https://www.youtube.com/watch?v=dQw4w9WgXcQ (with `/watch` route)
-  - https://yt.cdn.13373333.one/watch?v=dQw4w9WgXcQ, or https://yourdomain.com/watch?v=dQw4w9WgXcQ
-- https://youtu.be/dQw4w9WgXcQ (with `youtu.be` / official YouTube URL shortener)
-  - https://yt.cdn.13373333.one/dQw4w9WgXcQ, or https://yourdomain.com/dQw4w9WgXcQ
-- https://youtube.com/shorts/b1hnji5jPRE (with YouTube shorts)
-  - https://yt.cdn.13373333.one/shorts/b1hnji5jPRE, or https://yourdomain.com/shorts/dQw4w9WgXcQ
+- **`youtube.com/watch`**, route:
+  - https://yt.cdn.13373333.one/watch?v=dQw4w9WgXcQ
+  - https://yourdomain.com/watch?v=dQw4w9WgXcQ
+- **`youtu.be`**, YouTube URL shortener route:
+  - https://yt.cdn.13373333.one/dQw4w9WgXcQ
+  - https://yourdomain.com/dQw4w9WgXcQ
+- **`youtube.com/shorts`**, shorts route: (NEW)
+  - https://yt.cdn.13373333.one/shorts/b1hnji5jPRE
+  - https://yourdomain.com/shorts/dQw4w9WgXcQ
+  
 ## License
 [MIT](LICENSE)
