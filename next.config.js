@@ -12,6 +12,11 @@ const nextConfig = {
         source: "/",
         destination: "https://github.com/ray-1337/youtube-discord-embed/",
         permanent: true
+      },
+      {
+        source: "/shorts/:ytID",
+        destination: "/watch?v=:ytID",
+        permanent: false
       }
     ]
   },
