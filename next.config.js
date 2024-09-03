@@ -4,6 +4,16 @@ const nextConfig = {
 
   poweredByHeader: false,
 
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "https://github.com/ray-1337/youtube-discord-embed/",
+        permanent: true
+      }
+    ]
+  },
+
   async headers() {
     const scriptCSP = ['script-src', "'self'"];
 
