@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  assetPrefix: process.env.NODE_ENV !== "development" ? "https://ray1337-yt-dc-embed-static-assets.b-cdn.net/" : undefined,
+
   reactStrictMode: true,
 
   poweredByHeader: false,
