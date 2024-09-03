@@ -1,5 +1,3 @@
-import "dotenv/config";
-
 import Head from "next/head";
 import type { InferGetServerSidePropsType } from "next";
 import type { YouTubeMetadataBeforeDOM, ServerSidePropsWithV } from "../helpers/typings";
