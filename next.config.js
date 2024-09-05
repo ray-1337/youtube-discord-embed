@@ -6,6 +6,10 @@ const nextConfig = {
 
   poweredByHeader: false,
 
+  experimental: {
+    runtime: "edge"
+  },
+
   async redirects() {
     return [
       {
