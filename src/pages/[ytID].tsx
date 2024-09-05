@@ -6,6 +6,8 @@ import ms from "ms";
 import ytdl from "@distube/ytdl-core";
 import { dynamicSearchForYouTubeID } from "@/helpers/utility";
 
+export const runtime = "edge";
+
 const cache = new Map<string, YouTubeMetadataBeforeDOM>();
 const cacheTime = ms("6h");
 
