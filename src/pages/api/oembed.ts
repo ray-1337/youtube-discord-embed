@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-export const runtime = "edge";
+export const runtime = "experimental-edge";
 
 export const defaultEmbed = {
   "author_name":"YouTube Discord Embed, inspired by FixTwitter.",
