@@ -1,5 +1,5 @@
 # youtube-discord-embed
-Embed YouTube video on Discord, inspired by [FixTweet](https://fixupx.com), powered by [Next.js](https://nextjs.org)/[Vercel](https://vercel.app).
+Embed YouTube video on Discord, inspired by [FixTweet](https://fixupx.com), powered by [Next.js](https://nextjs.org)/[Cloudflare Pages](https://cloudflare.com).
 
 ![A final version of YouTube Discord Embed](https://repository-images.githubusercontent.com/704985019/9cc921f6-9f13-4c2b-98b1-001ff738f405)
 
