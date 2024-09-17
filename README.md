@@ -3,10 +3,14 @@ Embed YouTube video on Discord, inspired by [FixTweet](https://fixupx.com), powe
 
 ![A final version of YouTube Discord Embed](https://repository-images.githubusercontent.com/704985019/9cc921f6-9f13-4c2b-98b1-001ff738f405)
 
-## Disclaimer (UPDATE, 08.08.24)
+## Disclaimer (UPDATE II, 17.09.24)
 Due to recent YouTube breakdown, setting values of cookies is required.
 
 Please follow the [instructions here](https://github.com/distubejs/ytdl-core?tab=readme-ov-file#how-to-get-cookies), [stringify the JSON value](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify), rename the `.env.example` to `.env`, then paste the stringified JSON value to the `COOKIE_BYPASS` key.
+
+If you ever encounter the error message (which one day it will happen), '`Sign in to confirm you’re not a bot`', it means you need to return to step one, which involves renewing the cookies.
+
+It's simple: just go back to where you obtained the cookies and copy them again.
 
 ## Motivation
 I just hate the current YouTube embed, where in mobile, you'll be redirected outside Discord/to YouTube app just to play a video, which is not a really pleasant experience.
