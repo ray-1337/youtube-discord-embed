@@ -31,7 +31,7 @@ Absolutely, you can fork the repo, host it somewhere else, and change the domain
   - https://yourdomain.com/dQw4w9WgXcQ
 - **`youtube.com/shorts`**, shorts route: (NEW)
   - https://yt.cdn.13373333.one/shorts/b1hnji5jPRE
-  - https://yourdomain.com/shorts/dQw4w9WgXcQ
-  
+  - https://yourdomain.com/shorts/b1hnji5jPRE
+
 ## License
 [MIT](LICENSE)
