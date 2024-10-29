@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@distube/ytdl-core':
-        specifier: github:XM4ZE/ytdl-core
-        version: https://codeload.github.com/XM4ZE/ytdl-core/tar.gz/83072a83aa6377313668900a89abe25d93b73d4b
+        specifier: ^4.15.1
+        version: 4.15.1
       ms:
         specifier: ^2.1.3
         version: 2.1.3
@@ -52,9 +52,8 @@ packages:
     resolution: {integrity: sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==}
     engines: {node: '>=0.10.0'}
 
-  '@distube/ytdl-core@https://codeload.github.com/XM4ZE/ytdl-core/tar.gz/83072a83aa6377313668900a89abe25d93b73d4b':
-    resolution: {tarball: https://codeload.github.com/XM4ZE/ytdl-core/tar.gz/83072a83aa6377313668900a89abe25d93b73d4b}
-    version: 4.14.4
+  '@distube/ytdl-core@4.15.1':
+    resolution: {integrity: sha512-10voV+ixUVQgam4/GMhjNTX/ipk9odkPnPoRaUESs5E/EW0JujwPDc815z53D86mSRlVc8esH1eiuzFnxLJKcA==}
     engines: {node: '>=14.0'}
 
   '@eslint-community/eslint-utils@4.4.0':
@@ -736,11 +735,11 @@ packages:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
 
-  http-cookie-agent@6.0.5:
-    resolution: {integrity: sha512-sfZ8fDgDP3B1YB+teqSnAK1aPgBu8reUUGxSsndP2XnYN6cM29EURXWXZqQQiaRdor3B4QjpkUNfv21syaO4DA==}
+  http-cookie-agent@6.0.6:
+    resolution: {integrity: sha512-XkwhYUWo0yhiHBWqLmAe2kIBymVY70ewi9sKmy6YBHpNU3BCH4nipKrtY5/effAxj0qneQ9ziZG5TXgaKLfYgg==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      tough-cookie: ^4.0.0
+      tough-cookie: ^4.0.0 || ^5.0.0
       undici: ^5.11.0 || ^6.0.0
     peerDependenciesMeta:
       undici:
@@ -1421,9 +1420,9 @@ snapshots:
 
   '@aashutoshrathi/word-wrap@1.2.6': {}
 
-  '@distube/ytdl-core@https://codeload.github.com/XM4ZE/ytdl-core/tar.gz/83072a83aa6377313668900a89abe25d93b73d4b':
+  '@distube/ytdl-core@4.15.1':
     dependencies:
-      http-cookie-agent: 6.0.5(tough-cookie@4.1.4)(undici@5.28.4)
+      http-cookie-agent: 6.0.6(tough-cookie@4.1.4)(undici@5.28.4)
       m3u8stream: 0.8.6
       miniget: 4.2.3
       sax: 1.4.1
@@ -2313,7 +2312,7 @@ snapshots:
     dependencies:
       function-bind: 1.1.2
 
-  http-cookie-agent@6.0.5(tough-cookie@4.1.4)(undici@5.28.4):
+  http-cookie-agent@6.0.6(tough-cookie@4.1.4)(undici@5.28.4):
     dependencies:
       agent-base: 7.1.1
       tough-cookie: 4.1.4
