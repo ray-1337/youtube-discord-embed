@@ -1,6 +1,8 @@
+const cdnURL = "https://ray1337-yt-dc-embed-static-assets.b-cdn.net/";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  assetPrefix: process.env.NODE_ENV !== "development" ? "https://ray1337-yt-dc-embed-static-assets.b-cdn.net/" : undefined,
+  assetPrefix: process.env.NODE_ENV !== "development" ? cdnURL : undefined,
 
   reactStrictMode: true,
 
@@ -22,27 +24,12 @@ const nextConfig = {
   },
 
   async headers() {
-    const scriptCSP = ['script-src', "'self'"];
-
-    if (process.env.NODE_ENV === "development") {
-      scriptCSP.push("'unsafe-eval'");
-    };
-
     return [{
       source: "/:path",
       headers: [{
         key: "Content-Security-Policy",
         value: [
-          ['default-src', "'self'"],
-          scriptCSP,
-          ['style-src', "'self'"],
-          ['connect-src', "'self'"],
-          ['img-src', "'self'"],
-          ['base-uri',  "'self'"],
-          ['form-action', "'self'"],
-          ['font-src', "'self'"],
-          ['object-src', "'none'"],
-          ['frame-ancestors', "'none'"],
+          ['default-src', "'self'", cdnURL].concat(process.env.NODE_ENV === "development" ? ["'unsafe-eval'"] : []),
           ['block-all-mixed-content'],
           ['upgrade-insecure-requests']
         ]
