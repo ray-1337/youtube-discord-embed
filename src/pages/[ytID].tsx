@@ -20,7 +20,8 @@ if (cookiesList.length <= 0) {
 const agent = ytdl.createAgent(cookiesList);
 
 const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (props) => {
-  const fallbackURL = props?.url || "https://github.com/ray-1337";
+  const defaultFallbackValueURL: string = "https://github.com/ray-1337/youtube-discord-embed";
+  const fallbackURL = props?.url || defaultFallbackValueURL;
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -78,7 +79,7 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
                   "author_name": "YouTube Discord Embed, inspired by FixTwitter.",
                   "author_url": "https://13373333.one",
                   "provider_name": "YouTube / 13373333.one",
-                  "provider_url": "https://github.com/ray-1337/youtube-discord-embed",
+                  "provider_url": defaultFallbackValueURL,
                   "title": "YouTube Discord Embed, inspired by FixTwitter.",
                   "type": "link",
                   "version": "1.0"
