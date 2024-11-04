@@ -60,7 +60,7 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
             <meta property="og:video:width" content={String(props?.width)} />
             <meta property="og:video:height" content={String(props?.height)} />
 
-            <meta name="twitter:domain" content={"13373333.one"} />
+            <meta name="twitter:domain" content={"yt.cdn.13373333.one"} />
             <meta name="twitter:url" content={fallbackURL} />
             <meta name="twitter:description" content={title} />
             <meta name="twitter:card" content="player" />
