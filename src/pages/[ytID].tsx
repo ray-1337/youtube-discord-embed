@@ -78,7 +78,7 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
                 JSON.stringify({
                   "author_name": "YouTube Discord Embed, inspired by FixTwitter.",
                   "author_url": "https://13373333.one",
-                  "provider_name": "YouTube / 13373333.one",
+                  "provider_name": authorText,
                   "provider_url": defaultFallbackValueURL,
                   "title": "YouTube Discord Embed, inspired by FixTwitter.",
                   "type": "link",
