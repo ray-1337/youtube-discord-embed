@@ -73,19 +73,7 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
             <meta name="twitter:player:stream" content={props?.video_url} />
             <meta name="twitter:player:stream:content_type" content={"video/mp4"} />
 
-            <link rel="alternate" type="application/json+oembed" title={authorText}>
-              {
-                JSON.stringify({
-                  "author_name": "YouTube Discord Embed, inspired by FixTwitter.",
-                  "author_url": "https://13373333.one",
-                  "provider_name": authorText,
-                  "provider_url": defaultFallbackValueURL,
-                  "title": "YouTube Discord Embed, inspired by FixTwitter.",
-                  "type": "link",
-                  "version": "1.0"
-                })
-              }
-            </link>
+            <link rel="alternate" href={`https://${props?.host}/api/oembed?text=${props?.title}&url=${fallbackURL}`} type="application/json+oembed" title={authorText} />
           </Fragment>
         )
       }
@@ -138,7 +126,8 @@ export async function getServerSideProps(ctx: ServerSidePropsWithV) {
       video_url: firstRawVideoURL.url,
       url: `https://youtu.be/${youtubeID}`,
       height: firstRawVideoURL.height,
-      width: firstRawVideoURL.width
+      width: firstRawVideoURL.width,
+      host: ctx?.req?.headers?.host
     };
 
     cache.set(youtubeID, content);
