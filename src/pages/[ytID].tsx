@@ -137,8 +137,7 @@ export async function getServerSideProps(ctx: ServerSidePropsWithV) {
       video_url: firstRawVideoURL.url,
       url: `https://youtu.be/${youtubeID}`,
       height: firstRawVideoURL.height,
-      width: firstRawVideoURL.width,
-      host: ctx?.req?.headers?.host
+      width: firstRawVideoURL.width
     };
 
     cache.set(youtubeID, content);
