@@ -117,7 +117,7 @@ export async function getServerSideProps(ctx: ServerSidePropsWithV) {
     const firstRawVideoURL = highestFormat;
     if (!firstRawVideoURL?.url?.length || !firstRawVideoURL?.mimeType?.length) return { props: {} };
 
-    const isShort = (typeof firstRawVideoURL.height === "number" && typeof firstRawVideoURL?.width === "number") && firstRawVideoURL.height < firstRawVideoURL.width;
+    const isShort = (typeof firstRawVideoURL.height === "number" && typeof firstRawVideoURL?.width === "number") && (firstRawVideoURL.height > firstRawVideoURL.width);
 
     const content: YouTubeMetadataBeforeDOM = {
       author_name: `${ytVideoInfo?.videoDetails?.author?.name} (${ytVideoInfo?.videoDetails?.author?.user})`,
