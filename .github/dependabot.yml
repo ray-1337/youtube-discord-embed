@@ -1,0 +1,8 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    allow:
+      - dependency-name: "@distube/ytdl-core"
+    schedule:
+      interval: "daily"
