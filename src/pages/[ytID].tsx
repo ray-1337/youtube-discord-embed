@@ -65,7 +65,7 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
             <meta name="twitter:description" content={title} />
             <meta name="twitter:card" content="player" />
             <meta name="twitter:title" content={description} />
-            <meta name="twitter:image" content={"0"} />
+            <meta name="twitter:image" content={image} />
 
             <meta name="twitter:player" content={fallbackURL} />
             <meta name="twitter:player:width" content={String(props?.width)} />
