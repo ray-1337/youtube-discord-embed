@@ -114,14 +114,15 @@ export async function getServerSideProps(ctx: ServerSidePropsWithV) {
       highestFormat = lowest;
     };
 
-
     const firstRawVideoURL = highestFormat;
     if (!firstRawVideoURL?.url?.length || !firstRawVideoURL?.mimeType?.length) return { props: {} };
+
+    const isShort = (typeof firstRawVideoURL.height === "number" && typeof firstRawVideoURL?.width === "number") && firstRawVideoURL.height < firstRawVideoURL.width;
 
     const content: YouTubeMetadataBeforeDOM = {
       author_name: `${ytVideoInfo?.videoDetails?.author?.name} (${ytVideoInfo?.videoDetails?.author?.user})`,
       author_url: ytVideoInfo?.videoDetails?.author?.channel_url,
-      thumbnail_url: ytVideoInfo?.videoDetails?.thumbnails?.pop()?.url,
+      thumbnail_url: isShort === true ? `https://i.ytimg.com/vi/${youtubeID}/oardefault.jpg` : ytVideoInfo?.videoDetails?.thumbnails?.pop()?.url,
       title: ytVideoInfo?.videoDetails?.title,
       video_url: firstRawVideoURL.url,
       url: `https://youtu.be/${youtubeID}`,
