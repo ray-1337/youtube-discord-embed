@@ -34,6 +34,7 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
   const description = props?.title;
   const authorText = "YouTube / 13373333.one"
   const image = props?.thumbnail_url || "";
+  const host = props?.host || "yt.cdn.13373333.one";
 
   return (
     <Head>
@@ -60,7 +61,7 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
             <meta property="og:video:width" content={String(props?.width)} />
             <meta property="og:video:height" content={String(props?.height)} />
 
-            <meta name="twitter:domain" content={props?.host || "yt.cdn.13373333.one"} />
+            <meta name="twitter:domain" content={host} />
             <meta name="twitter:url" content={fallbackURL} />
             <meta name="twitter:description" content={title} />
             <meta name="twitter:card" content="player" />
@@ -73,7 +74,7 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
             <meta name="twitter:player:stream" content={props?.video_url} />
             <meta name="twitter:player:stream:content_type" content={"video/mp4"} />
 
-            <link rel="alternate" href={`https://${props?.host}/api/oembed?text=${props?.title}&url=${fallbackURL}`} type="application/json+oembed" title={authorText} />
+            <link rel="alternate" href={`https://${host}/api/oembed?text=${props?.title}&url=${fallbackURL}`} type="application/json+oembed" title={authorText} />
           </Fragment>
         )
       }
