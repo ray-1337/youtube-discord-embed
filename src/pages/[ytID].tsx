@@ -1,10 +1,9 @@
 import Head from "next/head";
-import type { InferGetServerSidePropsType } from "next";
-import type { YouTubeMetadataBeforeDOM, ServerSidePropsWithV } from "../helpers/typings";
+import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
+import type { YouTubeMetadataBeforeDOM } from "../helpers/typings";
 import { useEffect, type FC, Fragment } from "react";
 import ms from "ms";
 import ytdl from "@distube/ytdl-core";
-import { dynamicSearchForYouTubeID } from "@/helpers/utility";
 
 const cache = new Map<string, YouTubeMetadataBeforeDOM>();
 const cacheTime = ms("6h");
@@ -19,7 +18,7 @@ if (cookiesList.length <= 0) {
 
 const agent = ytdl.createAgent(cookiesList);
 
-const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (props) => {
+const WatchPage: FC<InferGetStaticPropsType<typeof getStaticProps>> = (props) => {
   const defaultFallbackValueURL: string = "https://github.com/ray-1337/youtube-discord-embed";
   const fallbackURL = props?.url || defaultFallbackValueURL;
 
@@ -82,9 +81,16 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
   );
 };
 
-export async function getServerSideProps(ctx: ServerSidePropsWithV) {
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: "blocking"
+  };
+};
+
+export async function getStaticProps({params}: GetStaticPropsContext<{ytID: string}>) {
   try {
-    const youtubeID = dynamicSearchForYouTubeID(ctx);
+    const youtubeID = params?.ytID;
     if (!youtubeID?.length || !ytdl.validateID(youtubeID)) return { props: {} };
 
     if (cache.has(youtubeID)) {
@@ -128,18 +134,23 @@ export async function getServerSideProps(ctx: ServerSidePropsWithV) {
       video_url: firstRawVideoURL.url,
       url: `https://youtu.be/${youtubeID}`,
       height: firstRawVideoURL.height,
-      width: firstRawVideoURL.width,
-      host: ctx?.req?.headers?.host
+      width: firstRawVideoURL.width
     };
 
     cache.set(youtubeID, content);
 
     setTimeout(() => cache.delete(youtubeID), cacheTime);
 
-    return { props: { ...content } };
+    return {
+      revalidate: Math.round(cacheTime / 1000),
+      props: { ...content }
+    };
   } catch (error) {
     console.error(error);
-    return { props: {} };
+
+    return {
+      notFound: true
+    };
   };
 };
 
