@@ -6,7 +6,6 @@ import ms from "ms";
 import ytdl from "@distube/ytdl-core";
 import { dynamicSearchForYouTubeID } from "@/helpers/utility";
 
-const cache = new Map<string, YouTubeMetadataBeforeDOM>();
 const cacheTime = ms("6h");
 
 let cookiesList: ytdl.Cookie[] = [];
@@ -87,12 +86,6 @@ export async function getServerSideProps({req, res, query}: GetServerSidePropsCo
     const youtubeID = dynamicSearchForYouTubeID(query);
     if (!youtubeID?.length || !ytdl.validateID(youtubeID)) return { props: {} };
 
-    if (cache.has(youtubeID)) {
-      const cachedURL = cache.get(youtubeID) as YouTubeMetadataBeforeDOM; 
-
-      return { props: { ...cachedURL } };
-    };
-
     const rawYouTubeURL = "https://youtu.be/" + youtubeID;
 
     // below this code pictures how stupid i am
@@ -132,9 +125,12 @@ export async function getServerSideProps({req, res, query}: GetServerSidePropsCo
       host: req?.headers?.host
     };
 
-    cache.set(youtubeID, content);
+    const convertedCacheTime = Math.round(cacheTime / 1000);
 
-    setTimeout(() => cache.delete(youtubeID), cacheTime);
+    res.setHeader(
+      'Cache-Control',
+      `public, max-age=${convertedCacheTime}, s-maxage=${convertedCacheTime}, immutable`
+    );
 
     return { props: { ...content } };
   } catch (error) {
