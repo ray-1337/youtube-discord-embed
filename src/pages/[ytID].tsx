@@ -1,6 +1,6 @@
 import Head from "next/head";
-import type { InferGetServerSidePropsType } from "next";
-import type { YouTubeMetadataBeforeDOM, ServerSidePropsWithV } from "../helpers/typings";
+import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import type { YouTubeMetadataBeforeDOM } from "../helpers/typings";
 import { useEffect, type FC, Fragment } from "react";
 import ms from "ms";
 import ytdl from "@distube/ytdl-core";
@@ -82,9 +82,9 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
   );
 };
 
-export async function getServerSideProps(ctx: ServerSidePropsWithV) {
+export async function getServerSideProps({req, res, query}: GetServerSidePropsContext<Partial<Record<"v" | "watch", string>>>) {
   try {
-    const youtubeID = dynamicSearchForYouTubeID(ctx);
+    const youtubeID = dynamicSearchForYouTubeID(query);
     if (!youtubeID?.length || !ytdl.validateID(youtubeID)) return { props: {} };
 
     if (cache.has(youtubeID)) {
@@ -129,7 +129,7 @@ export async function getServerSideProps(ctx: ServerSidePropsWithV) {
       url: `https://youtu.be/${youtubeID}`,
       height: firstRawVideoURL.height,
       width: firstRawVideoURL.width,
-      host: ctx?.req?.headers?.host
+      host: req?.headers?.host
     };
 
     cache.set(youtubeID, content);
