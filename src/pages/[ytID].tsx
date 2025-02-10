@@ -4,6 +4,7 @@ import type { YouTubeMetadataBeforeDOM } from "../helpers/typings";
 import { useEffect, type FC, Fragment } from "react";
 import ms from "ms";
 import ytdl from "@distube/ytdl-core";
+import { dynamicSearchForYouTubeID } from "@/helpers/utility";
 
 const cacheTime = ms("1h");
 
