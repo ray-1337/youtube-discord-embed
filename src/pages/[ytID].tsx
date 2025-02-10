@@ -5,7 +5,7 @@ import ms from "ms";
 import ytdl from "@distube/ytdl-core";
 
 import type { YouTubeMetadataBeforeDOM } from "../helpers/typings";
-import { dynamicSearchForYouTubeID } from "@/helpers/utility";
+import { getYouTubeID } from "@/helpers/utility";
 
 const cacheTime = ms("1h");
 
@@ -86,7 +86,7 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
 
 export async function getServerSideProps({req, res, query}: GetServerSidePropsContext<Partial<Record<"v" | "watch", string>>>) {
   try {
-    const youtubeID = dynamicSearchForYouTubeID(query);
+    const youtubeID = getYouTubeID(query);
     if (!youtubeID?.length || !ytdl.validateID(youtubeID)) {
       return {
         notFound: true

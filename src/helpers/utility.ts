@@ -1,7 +1,7 @@
 import { validateID } from "@distube/ytdl-core";
 import { type ParsedUrlQuery } from "node:querystring";
 
-export function dynamicSearchForYouTubeID(query?: ParsedUrlQuery) {
+export function getYouTubeID(query?: ParsedUrlQuery) {
   try {
     if (query?.ytID === "watch" && query?.v?.length && validateID(query.v as string)) {
       return String(query.v);
