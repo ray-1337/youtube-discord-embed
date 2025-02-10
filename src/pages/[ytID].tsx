@@ -22,6 +22,8 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
   const defaultFallbackValueURL: string = "https://github.com/ray-1337/youtube-discord-embed";
   const fallbackURL = props?.url || defaultFallbackValueURL;
 
+  const [width, height] = props.resolution;
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.open(fallbackURL, "_self");
@@ -57,8 +59,8 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
             <meta property="og:video" content={props?.video_url} />
             <meta property="og:video:secure_url" content={props?.video_url} />
             <meta property="og:video:type" content={"video/mp4"} />
-            <meta property="og:video:width" content={String(props?.width)} />
-            <meta property="og:video:height" content={String(props?.height)} />
+            <meta property="og:video:width" content={String(width)} />
+            <meta property="og:video:height" content={String(height)} />
 
             <meta name="twitter:domain" content={host} />
             <meta name="twitter:url" content={fallbackURL} />
@@ -68,8 +70,8 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
             <meta name="twitter:image" content={image} />
 
             <meta name="twitter:player" content={fallbackURL} />
-            <meta name="twitter:player:width" content={String(props?.width)} />
-            <meta name="twitter:player:height" content={String(props?.height)} />
+            <meta name="twitter:player:width" content={String(width)} />
+            <meta name="twitter:player:height" content={String(height)} />
             <meta name="twitter:player:stream" content={props?.video_url} />
             <meta name="twitter:player:stream:content_type" content={"video/mp4"} />
 
@@ -133,6 +135,7 @@ export async function getServerSideProps({req, res, query}: GetServerSidePropsCo
       title: ytVideoInfo?.videoDetails?.title,
       video_url: firstRawVideoURL.url,
       url: rawYouTubeURL,
+      resolution: [firstRawVideoURL?.width ?? 0, firstRawVideoURL?.height ?? 0],
       host: req?.headers?.host
     };
 
