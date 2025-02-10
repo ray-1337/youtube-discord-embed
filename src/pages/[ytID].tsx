@@ -132,9 +132,7 @@ export async function getServerSideProps({req, res, query}: GetServerSidePropsCo
       thumbnail_url: isShort === true ? `https://i.ytimg.com/vi/${youtubeID}/oardefault.jpg` : ytVideoInfo?.videoDetails?.thumbnails?.pop()?.url,
       title: ytVideoInfo?.videoDetails?.title,
       video_url: firstRawVideoURL.url,
-      url: `https://youtu.be/${youtubeID}`,
-      height: firstRawVideoURL.height,
-      width: firstRawVideoURL.width,
+      url: rawYouTubeURL,
       host: req?.headers?.host
     };
 
