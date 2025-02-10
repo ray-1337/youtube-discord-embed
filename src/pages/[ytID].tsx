@@ -84,14 +84,21 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
 export async function getServerSideProps({req, res, query}: GetServerSidePropsContext<Partial<Record<"v" | "watch", string>>>) {
   try {
     const youtubeID = dynamicSearchForYouTubeID(query);
-    if (!youtubeID?.length || !ytdl.validateID(youtubeID)) return { props: {} };
+    if (!youtubeID?.length || !ytdl.validateID(youtubeID)) {
+      return {
+        notFound: true
+      };
+    };
 
     const rawYouTubeURL = "https://youtu.be/" + youtubeID;
 
     // below this code pictures how stupid i am
     const ytVideoInfo = await ytdl.getInfo(rawYouTubeURL, { agent });
-
-    if (!ytVideoInfo) return { props: {} };
+    if (!ytVideoInfo) {
+      return {
+        notFound: true
+      };
+    }
     
     const liteFilteredFormats = ytVideoInfo.formats
     .filter(format => format.hasAudio && format.hasVideo && !format.isLive && !format.isHLS);
@@ -102,14 +109,20 @@ export async function getServerSideProps({req, res, query}: GetServerSidePropsCo
     if (!highestFormat) {
       const lowest = filteredFormats.find(format => format.quality === "medium");
       if (!lowest) {
-        return { props: {} };
+        return {
+          notFound: true
+        };
       };
 
       highestFormat = lowest;
     };
 
     const firstRawVideoURL = highestFormat;
-    if (!firstRawVideoURL?.url?.length || !firstRawVideoURL?.mimeType?.length) return { props: {} };
+    if (!firstRawVideoURL?.url?.length || !firstRawVideoURL?.mimeType?.length) {
+      return {
+        notFound: true
+      };
+    };
 
     const isShort = (typeof firstRawVideoURL.height === "number" && typeof firstRawVideoURL?.width === "number") && (firstRawVideoURL.height > firstRawVideoURL.width);
 
@@ -135,7 +148,9 @@ export async function getServerSideProps({req, res, query}: GetServerSidePropsCo
     return { props: { ...content } };
   } catch (error) {
     console.error(error);
-    return { props: {} };
+    return {
+      notFound: true
+    };
   };
 };
 
