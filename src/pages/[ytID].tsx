@@ -1,11 +1,10 @@
 import Head from "next/head";
-import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
+import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import type { YouTubeMetadataBeforeDOM } from "../helpers/typings";
 import { useEffect, type FC, Fragment } from "react";
 import ms from "ms";
 import ytdl from "@distube/ytdl-core";
 
-const cache = new Map<string, YouTubeMetadataBeforeDOM>();
 const cacheTime = ms("6h");
 
 let cookiesList: ytdl.Cookie[] = [];
@@ -81,23 +80,10 @@ const WatchPage: FC<InferGetStaticPropsType<typeof getStaticProps>> = (props) =>
   );
 };
 
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: "blocking"
-  };
-};
-
-export async function getStaticProps({params}: GetStaticPropsContext<{ytID: string}>) {
+export async function getServerSideProps({req, res, query}: GetServerSidePropsContext<Partial<Record<"v" | "watch", string>>>) {
   try {
-    const youtubeID = params?.ytID;
+    const youtubeID = dynamicSearchForYouTubeID(query);
     if (!youtubeID?.length || !ytdl.validateID(youtubeID)) return { props: {} };
-
-    if (cache.has(youtubeID)) {
-      const cachedURL = cache.get(youtubeID) as YouTubeMetadataBeforeDOM; 
-
-      return { props: { ...cachedURL } };
-    };
 
     const rawYouTubeURL = "https://youtu.be/" + youtubeID;
 
@@ -134,12 +120,16 @@ export async function getStaticProps({params}: GetStaticPropsContext<{ytID: stri
       video_url: firstRawVideoURL.url,
       url: `https://youtu.be/${youtubeID}`,
       height: firstRawVideoURL.height,
-      width: firstRawVideoURL.width
+      width: firstRawVideoURL.width,
+      host: req?.headers?.host
     };
 
-    cache.set(youtubeID, content);
+    const convertedCacheTime = Math.round(cacheTime / 1000);
 
-    setTimeout(() => cache.delete(youtubeID), cacheTime);
+    res.setHeader(
+      'Cache-Control',
+      `public, max-age=${convertedCacheTime}, s-maxage=${convertedCacheTime}, immutable`
+    );
 
     return {
       revalidate: Math.round(cacheTime / 1000),

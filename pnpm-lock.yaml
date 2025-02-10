@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@distube/ytdl-core':
-        specifier: ^4.16.0
-        version: 4.16.0
+        specifier: ^4.16.2
+        version: 4.16.2
       ms:
         specifier: ^2.1.3
         version: 2.1.3
@@ -52,8 +52,8 @@ packages:
     resolution: {integrity: sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==}
     engines: {node: '>=0.10.0'}
 
-  '@distube/ytdl-core@4.16.0':
-    resolution: {integrity: sha512-MuDpIs2OnvYX30mjjkNFoOhxf0nYe7D7RvEZiXGcvmnD95XGnNLBJeuXn0PS0Vad7y159c0Sclw+pYHnbjvZIw==}
+  '@distube/ytdl-core@4.16.2':
+    resolution: {integrity: sha512-n9nlw24efOwaKL2YbwqWEee3Xj59ORu5EhGVQLrYPmFwT/0v6Bfy6QU36z3tbVPR4BwUxB42IhjZ4lDmG/3yWg==}
     engines: {node: '>=20.18.1'}
 
   '@eslint-community/eslint-utils@4.4.0':
@@ -1364,19 +1364,19 @@ packages:
   text-table@0.2.0:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
 
-  tldts-core@6.1.75:
-    resolution: {integrity: sha512-AOvV5YYIAFFBfransBzSTyztkc3IMfz5Eq3YluaRiEu55nn43Fzaufx70UqEKYr8BoLCach4q8g/bg6e5+/aFw==}
+  tldts-core@6.1.77:
+    resolution: {integrity: sha512-bCaqm24FPk8OgBkM0u/SrEWJgHnhBWYqeBo6yUmcZJDCHt/IfyWBb+14CXdGi4RInMv4v7eUAin15W0DoA+Ytg==}
 
-  tldts@6.1.75:
-    resolution: {integrity: sha512-+lFzEXhpl7JXgWYaXcB6DqTYXbUArvrWAE/5ioq/X3CdWLbDjpPP4XTrQBmEJ91y3xbe4Fkw7Lxv4P3GWeJaNg==}
+  tldts@6.1.77:
+    resolution: {integrity: sha512-lBpoWgy+kYmuXWQ83+R7LlJCnsd9YW8DGpZSHhrMl4b8Ly/1vzOie3OdtmUJDkKxcgRGOehDu5btKkty+JEe+g==}
     hasBin: true
 
   to-regex-range@5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
 
-  tough-cookie@5.1.0:
-    resolution: {integrity: sha512-rvZUv+7MoBYTiDmFPBrhL7Ujx9Sk+q9wwm22x8c8T5IJaR+Wsyc7TNxbVxo84kZoRJZZMazowFLqpankBEQrGg==}
+  tough-cookie@5.1.1:
+    resolution: {integrity: sha512-Ek7HndSVkp10hmHP9V4qZO1u+pn1RU5sI0Fw+jCU3lyvuMZcgqsNgc6CmJJZyByK4Vm/qotGRJlfgAX8q+4JiA==}
     engines: {node: '>=16'}
 
   ts-api-utils@1.3.0:
@@ -1478,14 +1478,14 @@ snapshots:
 
   '@aashutoshrathi/word-wrap@1.2.6': {}
 
-  '@distube/ytdl-core@4.16.0':
+  '@distube/ytdl-core@4.16.2':
     dependencies:
-      http-cookie-agent: 6.0.8(tough-cookie@5.1.0)(undici@7.3.0)
+      http-cookie-agent: 6.0.8(tough-cookie@5.1.1)(undici@7.3.0)
       https-proxy-agent: 7.0.6
       m3u8stream: 0.8.6
       miniget: 4.2.3
       sax: 1.4.1
-      tough-cookie: 5.1.0
+      tough-cookie: 5.1.1
       undici: 7.3.0
     transitivePeerDependencies:
       - supports-color
@@ -2441,10 +2441,10 @@ snapshots:
     dependencies:
       function-bind: 1.1.2
 
-  http-cookie-agent@6.0.8(tough-cookie@5.1.0)(undici@7.3.0):
+  http-cookie-agent@6.0.8(tough-cookie@5.1.1)(undici@7.3.0):
     dependencies:
       agent-base: 7.1.3
-      tough-cookie: 5.1.0
+      tough-cookie: 5.1.1
     optionalDependencies:
       undici: 7.3.0
 
@@ -3022,19 +3022,19 @@ snapshots:
 
   text-table@0.2.0: {}
 
-  tldts-core@6.1.75: {}
+  tldts-core@6.1.77: {}
 
-  tldts@6.1.75:
+  tldts@6.1.77:
     dependencies:
-      tldts-core: 6.1.75
+      tldts-core: 6.1.77
 
   to-regex-range@5.0.1:
     dependencies:
       is-number: 7.0.0
 
-  tough-cookie@5.1.0:
+  tough-cookie@5.1.1:
     dependencies:
-      tldts: 6.1.75
+      tldts: 6.1.77
 
   ts-api-utils@1.3.0(typescript@5.5.4):
     dependencies:
