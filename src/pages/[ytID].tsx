@@ -5,7 +5,7 @@ import { useEffect, type FC, Fragment } from "react";
 import ms from "ms";
 import ytdl from "@distube/ytdl-core";
 
-const cacheTime = ms("6h");
+const cacheTime = ms("1h");
 
 let cookiesList: ytdl.Cookie[] = [];
 
@@ -20,6 +20,8 @@ const agent = ytdl.createAgent(cookiesList);
 const WatchPage: FC<InferGetStaticPropsType<typeof getStaticProps>> = (props) => {
   const defaultFallbackValueURL: string = "https://github.com/ray-1337/youtube-discord-embed";
   const fallbackURL = props?.url || defaultFallbackValueURL;
+
+  const [width, height] = props.resolution;
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -56,8 +58,8 @@ const WatchPage: FC<InferGetStaticPropsType<typeof getStaticProps>> = (props) =>
             <meta property="og:video" content={props?.video_url} />
             <meta property="og:video:secure_url" content={props?.video_url} />
             <meta property="og:video:type" content={"video/mp4"} />
-            <meta property="og:video:width" content={String(props?.width)} />
-            <meta property="og:video:height" content={String(props?.height)} />
+            <meta property="og:video:width" content={String(width)} />
+            <meta property="og:video:height" content={String(height)} />
 
             <meta name="twitter:domain" content={host} />
             <meta name="twitter:url" content={fallbackURL} />
@@ -67,8 +69,8 @@ const WatchPage: FC<InferGetStaticPropsType<typeof getStaticProps>> = (props) =>
             <meta name="twitter:image" content={image} />
 
             <meta name="twitter:player" content={fallbackURL} />
-            <meta name="twitter:player:width" content={String(props?.width)} />
-            <meta name="twitter:player:height" content={String(props?.height)} />
+            <meta name="twitter:player:width" content={String(width)} />
+            <meta name="twitter:player:height" content={String(height)} />
             <meta name="twitter:player:stream" content={props?.video_url} />
             <meta name="twitter:player:stream:content_type" content={"video/mp4"} />
 
@@ -83,14 +85,21 @@ const WatchPage: FC<InferGetStaticPropsType<typeof getStaticProps>> = (props) =>
 export async function getServerSideProps({req, res, query}: GetServerSidePropsContext<Partial<Record<"v" | "watch", string>>>) {
   try {
     const youtubeID = dynamicSearchForYouTubeID(query);
-    if (!youtubeID?.length || !ytdl.validateID(youtubeID)) return { props: {} };
+    if (!youtubeID?.length || !ytdl.validateID(youtubeID)) {
+      return {
+        notFound: true
+      };
+    };
 
     const rawYouTubeURL = "https://youtu.be/" + youtubeID;
 
     // below this code pictures how stupid i am
     const ytVideoInfo = await ytdl.getInfo(rawYouTubeURL, { agent });
-
-    if (!ytVideoInfo) return { props: {} };
+    if (!ytVideoInfo) {
+      return {
+        notFound: true
+      };
+    }
     
     const liteFilteredFormats = ytVideoInfo.formats
     .filter(format => format.hasAudio && format.hasVideo && !format.isLive && !format.isHLS);
@@ -101,26 +110,31 @@ export async function getServerSideProps({req, res, query}: GetServerSidePropsCo
     if (!highestFormat) {
       const lowest = filteredFormats.find(format => format.quality === "medium");
       if (!lowest) {
-        return { props: {} };
+        return {
+          notFound: true
+        };
       };
 
       highestFormat = lowest;
     };
 
     const firstRawVideoURL = highestFormat;
-    if (!firstRawVideoURL?.url?.length || !firstRawVideoURL?.mimeType?.length) return { props: {} };
+    if (!firstRawVideoURL?.url?.length || !firstRawVideoURL?.mimeType?.length) {
+      return {
+        notFound: true
+      };
+    };
 
     const isShort = (typeof firstRawVideoURL.height === "number" && typeof firstRawVideoURL?.width === "number") && (firstRawVideoURL.height > firstRawVideoURL.width);
 
     const content: YouTubeMetadataBeforeDOM = {
       author_name: `${ytVideoInfo?.videoDetails?.author?.name} (${ytVideoInfo?.videoDetails?.author?.user})`,
       author_url: ytVideoInfo?.videoDetails?.author?.channel_url,
-      thumbnail_url: isShort === true ? `https://i.ytimg.com/vi/${youtubeID}/oardefault.jpg` : ytVideoInfo?.videoDetails?.thumbnails?.pop()?.url,
+      thumbnail_url: isShort === true ? `https://i.ytimg.com/vi/${youtubeID}/oardefault.jpg` : (ytVideoInfo?.videoDetails?.thumbnails?.pop()?.url || `https://img.youtube.com/vi/${youtubeID}/maxresdefault.jpg`),
       title: ytVideoInfo?.videoDetails?.title,
       video_url: firstRawVideoURL.url,
-      url: `https://youtu.be/${youtubeID}`,
-      height: firstRawVideoURL.height,
-      width: firstRawVideoURL.width,
+      url: rawYouTubeURL,
+      resolution: [firstRawVideoURL?.width ?? 0, firstRawVideoURL?.height ?? 0],
       host: req?.headers?.host
     };
 
@@ -128,7 +142,7 @@ export async function getServerSideProps({req, res, query}: GetServerSidePropsCo
 
     res.setHeader(
       'Cache-Control',
-      `public, max-age=${convertedCacheTime}, s-maxage=${convertedCacheTime}, immutable`
+      `public, max-age=${convertedCacheTime}, s-maxage=${convertedCacheTime}, stale-while-revalidate=30, immutable`
     );
 
     return {
@@ -137,7 +151,6 @@ export async function getServerSideProps({req, res, query}: GetServerSidePropsCo
     };
   } catch (error) {
     console.error(error);
-
     return {
       notFound: true
     };
