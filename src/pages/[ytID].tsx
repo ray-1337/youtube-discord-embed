@@ -129,7 +129,7 @@ export async function getServerSideProps({req, res, query}: GetServerSidePropsCo
     const content: YouTubeMetadataBeforeDOM = {
       author_name: `${ytVideoInfo?.videoDetails?.author?.name} (${ytVideoInfo?.videoDetails?.author?.user})`,
       author_url: ytVideoInfo?.videoDetails?.author?.channel_url,
-      thumbnail_url: isShort === true ? `https://i.ytimg.com/vi/${youtubeID}/oardefault.jpg` : ytVideoInfo?.videoDetails?.thumbnails?.pop()?.url,
+      thumbnail_url: isShort === true ? `https://i.ytimg.com/vi/${youtubeID}/oardefault.jpg` : (ytVideoInfo?.videoDetails?.thumbnails?.pop()?.url || `https://img.youtube.com/vi/${youtubeID}/maxresdefault.jpg`),
       title: ytVideoInfo?.videoDetails?.title,
       video_url: firstRawVideoURL.url,
       url: rawYouTubeURL,
