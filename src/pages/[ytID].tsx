@@ -87,7 +87,7 @@ const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (p
 export async function getServerSideProps({req, res, query}: GetServerSidePropsContext<Partial<Record<"v" | "watch", string>>>) {
   try {
     const youtubeID = getYouTubeID(query);
-    if (!youtubeID?.length || !ytdl.validateID(youtubeID)) {
+    if (youtubeID !== null) {
       return {
         notFound: true
       };
