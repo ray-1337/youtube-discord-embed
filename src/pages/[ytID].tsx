@@ -142,7 +142,7 @@ export async function getServerSideProps({req, res, query}: GetServerSidePropsCo
 
     res.setHeader(
       'Cache-Control',
-      `public, max-age=${convertedCacheTime}, s-maxage=${convertedCacheTime}, immutable`
+      `public, max-age=${convertedCacheTime}, s-maxage=${convertedCacheTime}, stale-while-revalidate=30, immutable`
     );
 
     return { props: { ...content } };
