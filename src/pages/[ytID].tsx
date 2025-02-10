@@ -19,7 +19,7 @@ if (cookiesList.length <= 0) {
 
 const agent = ytdl.createAgent(cookiesList);
 
-const WatchPage: FC<InferGetStaticPropsType<typeof getStaticProps>> = (props) => {
+const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (props) => {
   const defaultFallbackValueURL: string = "https://github.com/ray-1337/youtube-discord-embed";
   const fallbackURL = props?.url || defaultFallbackValueURL;
 
