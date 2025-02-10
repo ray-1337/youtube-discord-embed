@@ -101,12 +101,11 @@ export async function getServerSideProps({req, res, query}: GetServerSidePropsCo
       return {
         notFound: true
       };
-    }
-    
-    const liteFilteredFormats = ytVideoInfo.formats
-    .filter(format => format.hasAudio && format.hasVideo && !format.isLive && !format.isHLS);
+    };
 
-    const filteredFormats = liteFilteredFormats.filter(format => format.quality === "medium" || format.quality === "hd720");
+    const filteredFormats = ytVideoInfo.formats.filter(
+      format => (format.hasAudio && format.hasVideo && !format.isLive && !format.isHLS) && (format.quality === "medium" || format.quality === "hd720")
+    );
 
     let highestFormat = filteredFormats.find(format => format.quality === "hd720");
     if (!highestFormat) {
