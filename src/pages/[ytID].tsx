@@ -2,14 +2,14 @@ import Head from "next/head";
 import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import { useEffect, type FC, Fragment } from "react";
 import ms from "ms";
-import ytdl from "@distube/ytdl-core";
+import { createAgent, getInfo, type Cookie } from "@distube/ytdl-core";
 
 import type { YouTubeMetadataBeforeDOM } from "../helpers/typings";
 import { getYouTubeID } from "@/helpers/utility";
 
 const cacheTime = ms("1h");
 
-let cookiesList: ytdl.Cookie[] = [];
+let cookiesList: Cookie[] = [];
 
 if (cookiesList.length <= 0) {
   if (typeof process.env?.COOKIE_BYPASS === "string") {
@@ -17,7 +17,7 @@ if (cookiesList.length <= 0) {
   };
 };
 
-const agent = ytdl.createAgent(cookiesList);
+const agent = createAgent(cookiesList);
 
 const WatchPage: FC<InferGetServerSidePropsType<typeof getServerSideProps>> = (props) => {
   const defaultFallbackValueURL: string = "https://github.com/ray-1337/youtube-discord-embed";
@@ -96,7 +96,7 @@ export async function getServerSideProps({req, res, query}: GetServerSidePropsCo
     const rawYouTubeURL = "https://youtu.be/" + youtubeID;
 
     // below this code pictures how stupid i am
-    const ytVideoInfo = await ytdl.getInfo(rawYouTubeURL, { agent });
+    const ytVideoInfo = await getInfo(rawYouTubeURL, { agent });
     if (!ytVideoInfo) {
       return {
         notFound: true
