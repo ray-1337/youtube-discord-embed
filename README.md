@@ -29,9 +29,15 @@ Absolutely, you can fork the repo, host it somewhere else, and change the domain
 - **`youtu.be`**, YouTube URL shortener route:
   - https://yt.cdn.13373333.one/dQw4w9WgXcQ
   - https://yourdomain.com/dQw4w9WgXcQ
-- **`youtube.com/shorts`**, shorts route: (NEW)
+- **`youtube.com/shorts`**, shorts route:
   - https://yt.cdn.13373333.one/shorts/b1hnji5jPRE
   - https://yourdomain.com/shorts/b1hnji5jPRE
+
+## Development/Installation
+- Run `pnpm install` to install the dependencies.
+- Use:
+  - `pnpm dev` for development.
+  - `pnpm build && pnpm start` for production-ready.
 
 ## License
 [MIT](LICENSE)
