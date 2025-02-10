@@ -6,7 +6,7 @@ import ms from "ms";
 import ytdl from "@distube/ytdl-core";
 import { dynamicSearchForYouTubeID } from "@/helpers/utility";
 
-const cacheTime = ms("6h");
+const cacheTime = ms("1h");
 
 let cookiesList: ytdl.Cookie[] = [];
 
