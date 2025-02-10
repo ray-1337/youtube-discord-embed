@@ -148,7 +148,6 @@ export async function getServerSideProps({req, res, query}: GetServerSidePropsCo
     );
 
     return {
-      revalidate: Math.round(cacheTime / 1000),
       props: { ...content }
     };
   } catch (error) {
