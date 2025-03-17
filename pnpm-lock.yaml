@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@distube/ytdl-core':
         specifier: github:ray-1337/ytdl-core#compat-master
-        version: https://codeload.github.com/ray-1337/ytdl-core/tar.gz/207b11e5c115995b0625baafe3950fd5e72d5eec
+        version: https://codeload.github.com/ray-1337/ytdl-core/tar.gz/0e28a2bca1efa5c2bc1932dbcbb03fe3d7bc34a5
       ms:
         specifier: ^2.1.3
         version: 2.1.3
@@ -48,8 +48,8 @@ importers:
 
 packages:
 
-  '@distube/ytdl-core@https://codeload.github.com/ray-1337/ytdl-core/tar.gz/207b11e5c115995b0625baafe3950fd5e72d5eec':
-    resolution: {tarball: https://codeload.github.com/ray-1337/ytdl-core/tar.gz/207b11e5c115995b0625baafe3950fd5e72d5eec}
+  '@distube/ytdl-core@https://codeload.github.com/ray-1337/ytdl-core/tar.gz/0e28a2bca1efa5c2bc1932dbcbb03fe3d7bc34a5':
+    resolution: {tarball: https://codeload.github.com/ray-1337/ytdl-core/tar.gz/0e28a2bca1efa5c2bc1932dbcbb03fe3d7bc34a5}
     version: 4.16.4
     engines: {node: '>=20.18.1'}
 
@@ -1473,7 +1473,7 @@ packages:
 
 snapshots:
 
-  '@distube/ytdl-core@https://codeload.github.com/ray-1337/ytdl-core/tar.gz/207b11e5c115995b0625baafe3950fd5e72d5eec':
+  '@distube/ytdl-core@https://codeload.github.com/ray-1337/ytdl-core/tar.gz/0e28a2bca1efa5c2bc1932dbcbb03fe3d7bc34a5':
     dependencies:
       http-cookie-agent: 6.0.8(tough-cookie@5.1.1)(undici@7.3.0)
       https-proxy-agent: 7.0.6
