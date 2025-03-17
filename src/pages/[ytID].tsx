@@ -7,6 +7,8 @@ import { createAgent, getInfo, type Cookie } from "@distube/ytdl-core";
 import type { YouTubeMetadataBeforeDOM } from "../helpers/typings";
 import { getYouTubeID } from "@/helpers/utility";
 
+export const runtime = "edge";
+
 const cacheTime = ms("1h");
 
 let cookiesList: Cookie[] = [];
