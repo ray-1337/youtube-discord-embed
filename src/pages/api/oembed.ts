@@ -24,5 +24,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     forwardedEmbed.author_url = safelySlice(req.query.url as string);
   };
 
-  res.status(200).json(forwardedEmbed);
+  return new Response(JSON.stringify(forwardedEmbed), {
+    status: 200,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
 };
