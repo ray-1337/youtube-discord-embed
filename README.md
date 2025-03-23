@@ -1,27 +1,33 @@
-# youtube-discord-embed
-Embed YouTube video on Discord, inspired by [FixTweet](https://fixupx.com), powered by [Next.js](https://nextjs.org)/[Vercel](https://vercel.app).
+# YouTube Discord Embed
+Embed YouTube video on Discord by pulling off YouTube video, and make it playable through embeds with OpenGraph/Twitter meta tags.
+
+This project is highly inspired by [FixTweet](https://fixupx.com), and powered with [Next.js](https://nextjs.org)/[Vercel](https://vercel.app).
 
 ![A final version of YouTube Discord Embed](https://repository-images.githubusercontent.com/704985019/9cc921f6-9f13-4c2b-98b1-001ff738f405)
 
-## Disclaimer (UPDATE II, 17.09.24)
-Due to recent YouTube breakdown, setting values of cookies is required.
+# Setup
+- Run `pnpm install` to install the dependencies.
+- Edit `.env.example` to `.env`
+- Edit `COOKIE_BYPASS` value by:
+  - following the [instructions here](https://github.com/distubejs/ytdl-core?tab=readme-ov-file#how-to-get-cookies),
+  - [stringify the JSON value](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify),
+  - and, paste the value.
+- Then, use:
+  - `pnpm dev` for development.
+  - `pnpm build` and then `pnpm start` for production-ready.
 
-Please follow the [instructions here](https://github.com/distubejs/ytdl-core?tab=readme-ov-file#how-to-get-cookies), [stringify the JSON value](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify), rename the `.env.example` to `.env`, then paste the stringified JSON value to the `COOKIE_BYPASS` key.
+# Error Handling
+In a week or two, YouTube starts to show an error such as '`Sign in to confirm you’re not a bot`'.
 
-If you ever encounter the error message (which one day it will happen), '`Sign in to confirm you’re not a bot`', it means you need to return to step one, which involves renewing the cookies.
+You can handle this by:
+- Open your browser (a browser where you previously export those cookies above), login to your YouTube account, and starts by doing something such as watching a YouTube video.
+- Or, reset the `COOKIE_BYPASS` key value by redoing the **Setup** above.
 
-It's simple: just go back to where you obtained the cookies and copy them again.
+# Self-host
+You can fork the repository, host it somewhere else, and change the domain.
 
-## Motivation
-I just hate the current YouTube embed, where in mobile, you'll be redirected outside Discord/to YouTube app just to play a video, which is not a really pleasant experience.
-
-## What does this do?
-Basically pulling off YouTube video, and make it playable through embeds with OpenGraph/Twitter meta tags.
-
-This concept is pretty much the same with [FixTweet](https://fixupx.com) or similar.
-
-## Nice, can I use this?
-Absolutely, you can fork the repo, host it somewhere else, and change the domain.
+# Cloud-hosted domain
+I also hosted the project for free on the cloud. You can use it by replacing `youtube.com/watch` or `youtu.be` with my domain.
 
 - **`youtube.com/watch`**, normal route:
   - https://yt.cdn.13373333.one/watch?v=dQw4w9WgXcQ
@@ -32,12 +38,6 @@ Absolutely, you can fork the repo, host it somewhere else, and change the domain
 - **`youtube.com/shorts`**, shorts route:
   - https://yt.cdn.13373333.one/shorts/b1hnji5jPRE
   - https://yourdomain.com/shorts/b1hnji5jPRE
-
-## Development/Installation
-- Run `pnpm install` to install the dependencies.
-- Use:
-  - `pnpm dev` for development.
-  - `pnpm build && pnpm start` for production-ready.
 
 ## License
 [MIT](LICENSE)
