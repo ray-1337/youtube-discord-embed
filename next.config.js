@@ -25,7 +25,8 @@ const nextConfig = {
       headers: [{
         key: "Content-Security-Policy",
         value: [
-          ['default-src', "'self'", cdnURL].concat(process.env.NODE_ENV === "development" ? ["'unsafe-eval'"] : []),
+          ['default-src', "'none'"].concat(process.env.NODE_ENV === "development" ? ["'unsafe-eval'"] : []),
+          ['script-src', "'self'"],
           ['block-all-mixed-content'],
           ['upgrade-insecure-requests']
         ]
