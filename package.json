@@ -16,8 +16,8 @@
   "devDependencies": {
     "@types/ms": "^0.7.34",
     "@types/node": "^20.14.14",
-    "@types/react": "^19.0.8",
-    "@types/react-dom": "^19.0.3",
+    "@types/react": "^19.0.12",
+    "@types/react-dom": "^19.0.4",
     "eslint": "^9.20.0",
     "eslint-config-next": "^15.2.3",
     "typescript": "^5.8.2"
