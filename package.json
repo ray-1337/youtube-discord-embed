@@ -7,7 +7,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@distube/ytdl-core": "^4.15.9",
+    "@distube/ytdl-core": "^4.16.5",
     "ms": "^2.1.3",
     "next": "^15.2.3",
     "react": "^19.0.0",
