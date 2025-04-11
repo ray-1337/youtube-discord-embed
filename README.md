@@ -1,3 +1,7 @@
+# [DEPRECATED]
+> [!WARNING]
+> This project is no longer maintained due to YouTube installed a DRM to its system, and it's been a journey for me to find multiple solutions just to get it work.
+
 # YouTube Discord Embed
 Embed YouTube video on Discord by pulling off YouTube video, and make it playable through embeds with OpenGraph/Twitter meta tags.
 
